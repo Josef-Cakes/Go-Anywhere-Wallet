@@ -1,5 +1,4 @@
 from django.db import models
-from decimal import Decimal
 
 class UserProfile(models.Model):
     user_id = models.AutoField(primary_key=True)
@@ -15,9 +14,6 @@ class UserProfile(models.Model):
     province = models.CharField(max_length=50)
     birthdate = models.DateField()
 
-    def __str__(self):
-        return self.username
-
 class Account(models.Model):
     ACCOUNT_TYPE = (
         ('savings', 'Savings'),
@@ -25,19 +21,12 @@ class Account(models.Model):
     )
     account_id = models.AutoField(primary_key=True)
     user_id = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="accounts")
-    userid = models.CharField(max_length=150, unique=True)
     account_number = models.CharField(max_length=20, unique=True)
     account_type = models.CharField(max_length=50, choices=ACCOUNT_TYPE)
     balance = models.DecimalField(max_digits=12, decimal_places=2)
 
     def __str__(self):
-        return f"{self.account_number} ({self.user_id.username})"
-
-    def deposit(self, amount):
-        if amount <= 0:
-            raise ValueError("Deposit amount must be positive.")
-        self.balance += amount
-        self.save()
+        return f"{self.account_number} ({self.user.username})"
 
 class Transaction(models.Model):
     TRANSACTION_TYPE = (

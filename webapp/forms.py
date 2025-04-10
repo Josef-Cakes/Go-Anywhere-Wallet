@@ -1,5 +1,5 @@
 from django import forms
-from .models import UserProfile, Account, Transaction
+from .models import UserProfile
 
 class SignupForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -22,7 +22,7 @@ class SignupForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.password = self.cleaned_data["password"]
+        user.password = self.cleaned_data["password"]  # Store password as plain text
         if commit:
             user.save()
         return user
@@ -30,25 +30,12 @@ class SignupForm(forms.ModelForm):
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150)
     password = forms.CharField(widget=forms.PasswordInput)
- 
 
-class DepositForm(forms.Form):
-    amount = forms.DecimalField(
-        max_digits=12, 
-        decimal_places=2,
-        min_value=100,  # Minimum value for deposit
-    )
+    
 
-    def cleaned_data(self):
-        amount = self.cleaned_data.get(amount)
-        if amount < 100:
-            raise forms.ValidationError("Amount must be greater than 100.")
-        return amount
-
-class WithdrawForm(forms.Form):
-    amount = forms.DecimalField(max_digits=12, decimal_places=2)
-
-class TransferForm(forms.Form):
-    sender_account = forms.ModelChoiceField(queryset=Account.objects.all())
-    receiver_account = forms.ModelChoiceField(queryset=Account.objects.all())
-    amount = forms.DecimalField(max_digits=12, decimal_places=2)
+'''
+class TransactionForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ['transactionType', 'amount']
+'''
