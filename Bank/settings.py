@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'Bank.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'dbBankSystem',
+        'NAME': 'db_BankSystem',
         'USER': 'root',
-        'PASSWORD': 'bacolod1',
+        'PASSWORD': '1968',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {'init_command': "set sql_mode='strict_trans_tables'"},

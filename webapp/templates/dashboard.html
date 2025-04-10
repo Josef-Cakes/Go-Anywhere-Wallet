@@ -3,52 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Dashboard - G.A.W</title>
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(to right, #4a90e2, #8e44ad);
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 350px;
-            text-align: center;
-        }
-        h2 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-        p {
-            color: #666;
-        }
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #4a90e2;
-            border: none;
-            color: white;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-bottom: 10px;
-        }
-        button:hover {
-            background: #357ab7;
-        }
+        body { font-family: Arial, sans-serif; background-color: #f4f4f4; margin: 0; padding: 0; }
+        .navbar { background: #0980ff; padding: 15px; text-align: center; color: white; font-size: 20px; }
+        .container { width: 80%; margin: 20px auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        .account-info { background: #e9ecef; padding: 10px; border-radius: 5px; }
+        .btn { display: inline-block; padding: 10px; background: #28a745; color: white; text-decoration: none; border-radius: 5px; margin-top: 10px; }
+        .btn:hover { background: #218838; }
     </style>
 </head>
-<body>
+<body class="">
+    <div class="navbar">Welcome GAW</div>
     <div class="container">
-        <h2>Welcome, {{ user.first_name }}!</h2>
-        <p>Today is {{ today_date }}</p>
-        <a href="{% url 'createtransaction' %}">New Transaction</a>
+        <h2>Dashboard</h2>
+        <div class="account-info">
+            <p><strong>Account Type:</strong> Savings</p>
+            <p><strong>Balance:</strong> $0.00</p>
         </div>
+        <a href="{% url 'deposit' %}" class="btn">Deposit Money</a>
+        <a href="{% url 'withdraw' %}" class="btn">Withdraw Money</a>
+        <a href="{% url 'index' %}" class="btn" style="background: #dc3545;">Logout</a>
+    </div>
 </body>
 </html>
